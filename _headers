@@ -1,0 +1,24 @@
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </auth.md>; rel="service-doc"; type="text/markdown"
+  Link: </index.md>; rel="alternate"; type="text/markdown"
+
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  Access-Control-Allow-Origin: *
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+
+/.well-known/agent-skills/*
+  Access-Control-Allow-Origin: *
+
+/.well-known/mcp/*
+  Access-Control-Allow-Origin: *

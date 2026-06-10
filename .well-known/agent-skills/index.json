@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agentskills.io/schemas/v0.2.0/index.json",
+  "version": "0.2.0",
+  "skills": [
+    {
+      "name": "contact",
+      "type": "skill",
+      "description": "How an agent should contact or hire AI Hire (aiforhire.app) on behalf of a user — channels, required information, and what to expect.",
+      "url": "https://aiforhire.app/.well-known/agent-skills/contact/SKILL.md",
+      "sha256": "0209578d2c4465816a601e18c50d2240e359a403067827c39e20a51bbe269451"
+    },
+    {
+      "name": "services",
+      "type": "skill",
+      "description": "What AI Hire (aiforhire.app) offers — workflow automation, bots and assistants, AI agents, a 2-week diagnostic-to-production engagement — and how to query its n8n MCP server.",
+      "url": "https://aiforhire.app/.well-known/agent-skills/services/SKILL.md",
+      "sha256": "6df264956acbca24d42a90773b76b5bee201df4973dc9491eee8d7dfe47f671a"
+    }
+  ]
+}

@@ -1220,5 +1220,107 @@
     })();
   </script>
 
+  <script>
+    (function () {
+      try {
+        if (!('modelContext' in navigator) || typeof navigator.modelContext.provideContext !== 'function') return;
+
+        var WHATSAPP = 'https://wa.me/573001234567';
+        var EMAIL = 'hola@aiforhire.app';
+
+        var textResult = function (text) {
+          return { content: [{ type: 'text', text: text }] };
+        };
+
+        var sectionText = function (selector, fallback) {
+          try {
+            var el = document.querySelector(selector);
+            if (el && el.textContent) {
+              var t = el.textContent.replace(/\s+/g, ' ').trim();
+              if (t.length > 60) return t;
+            }
+          } catch (e) {}
+          return fallback;
+        };
+
+        var SERVICES_FALLBACK = 'AI Hire ofrece tres formas de poner la IA a trabajar: ' +
+          '1) Automatizaciones: conectamos tus sistemas y eliminamos el trabajo manual repetitivo ' +
+          '(facturación automática, notificaciones internas, reportes programados). ' +
+          '2) Bots con IA: bots que entienden lenguaje natural y actúan, responden clientes, ' +
+          'procesan documentos y clasifican correos (atención al cliente 24/7). ' +
+          '3) Agentes IA e implementaciones a medida: integramos herramientas de IA en tus procesos ' +
+          'internos (ERP, CRM, WhatsApp Business, email corporativo), sin código propio que mantener.';
+
+        var PROCESS_FALLBACK = 'De diagnóstico a producción en menos de dos semanas. ' +
+          'Paso 01 Diagnóstico (30 minutos, sin compromiso): entendemos tus procesos y dónde la IA ' +
+          'genera más valor. Paso 02 Diseño (1 semana, iteraciones contigo): construimos el agente o ' +
+          'la automatización conectada a tus sistemas. Paso 03 En producción (desde el día uno): ' +
+          'tu equipo ahorra horas desde el primer día, con monitoreo y soporte continuo.';
+
+        navigator.modelContext.provideContext({
+          tools: [
+            {
+              name: 'get_services',
+              description: 'Get a summary of the three AI Hire service lines: process automations, AI bots/assistants, and custom AI agent implementations.',
+              inputSchema: { type: 'object', properties: {} },
+              execute: function () {
+                return textResult(sectionText('#servicios', SERVICES_FALLBACK));
+              }
+            },
+            {
+              name: 'get_process',
+              description: 'Get a summary of the AI Hire delivery process: from diagnostic to production in under two weeks.',
+              inputSchema: { type: 'object', properties: {} },
+              execute: function () {
+                return textResult(sectionText('#como-funciona', PROCESS_FALLBACK));
+              }
+            },
+            {
+              name: 'get_contact_info',
+              description: 'Get AI Hire contact channels: email and WhatsApp.',
+              inputSchema: { type: 'object', properties: {} },
+              execute: function () {
+                return textResult('Contacto AI Hire — Email: ' + EMAIL + ' | WhatsApp: ' + WHATSAPP);
+              }
+            },
+            {
+              name: 'compose_contact_message',
+              description: 'Compose a prefilled WhatsApp deep link and a mailto link with a Spanish contact message including the company name and the need described. It does NOT send anything; the user reviews and sends the message themselves.',
+              inputSchema: {
+                type: 'object',
+                properties: {
+                  company: { type: 'string', description: 'Company name' },
+                  need: { type: 'string', description: 'What the company needs or wants to automate' }
+                },
+                required: ['need']
+              },
+              execute: function (args) {
+                var input = args || {};
+                if (typeof input.need !== 'string' || !input.need.replace(/\s+/g, '')) {
+                  return textResult('Error: el campo "need" es obligatorio y debe ser un texto no vacío.');
+                }
+                var company = (typeof input.company === 'string' && input.company.trim()) ? input.company.trim() : '';
+                var msg = 'Hola, ' +
+                  (company ? 'escribo de parte de ' + company + '. ' : '') +
+                  'Nos interesa implementar IA en nuestra empresa. Nuestra necesidad: ' +
+                  input.need.trim() + '. ¿Podemos agendar un diagnóstico?';
+                var waLink = WHATSAPP + '?text=' + encodeURIComponent(msg);
+                var mailLink = 'mailto:' + EMAIL +
+                  '?subject=' + encodeURIComponent('Consulta desde aiforhire.app') +
+                  '&body=' + encodeURIComponent(msg);
+                return textResult('Mensaje preparado (no se ha enviado nada; revísalo y envíalo tú mismo).\n' +
+                  'WhatsApp: ' + waLink + '\n' +
+                  'Email: ' + mailLink + '\n' +
+                  'Texto del mensaje: ' + msg);
+              }
+            }
+          ]
+        });
+      } catch (e) {
+        /* WebMCP es opcional: nunca debe romper la página */
+      }
+    })();
+  </script>
+
 </body>
 </html>

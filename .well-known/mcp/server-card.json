@@ -1,0 +1,28 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/draft/server-card.json",
+  "serverInfo": {
+    "name": "n8n Documentation MCP Server",
+    "version": "2.54.0",
+    "description": "Model Context Protocol server providing comprehensive n8n node documentation and workflow management"
+  },
+  "transport": {
+    "type": "streamable-http",
+    "endpoint": "https://n8n.aiforhire.app/n8n-mcp/mcp"
+  },
+  "capabilities": {
+    "tools": {}
+  },
+  "authentication": {
+    "type": "oauth2",
+    "authorization_servers": [
+      "https://n8n.aiforhire.app"
+    ],
+    "authorization_server_metadata": "https://n8n.aiforhire.app/.well-known/oauth-authorization-server",
+    "registration_endpoint": "https://n8n.aiforhire.app/mcp-oauth/register",
+    "scopes_supported": [
+      "tool:listWorkflows",
+      "tool:getWorkflowDetails"
+    ],
+    "documentation": "https://aiforhire.app/auth.md"
+  }
+}

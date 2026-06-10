@@ -1,0 +1,18 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://n8n.aiforhire.app/n8n-mcp/mcp",
+      "service-doc": [
+        {
+          "href": "https://aiforhire.app/auth.md",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://n8n.aiforhire.app/n8n-mcp/health"
+        }
+      ]
+    }
+  ]
+}

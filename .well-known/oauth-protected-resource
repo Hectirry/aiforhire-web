@@ -1,0 +1,15 @@
+{
+  "resource": "https://n8n.aiforhire.app/n8n-mcp/mcp",
+  "authorization_servers": [
+    "https://n8n.aiforhire.app"
+  ],
+  "scopes_supported": [
+    "tool:listWorkflows",
+    "tool:getWorkflowDetails"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "resource_name": "AI Hire — n8n MCP Server",
+  "resource_documentation": "https://aiforhire.app/auth.md"
+}

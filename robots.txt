@@ -1,0 +1,8 @@
+# aiforhire.app — robots.txt
+# Todos los rastreadores son bienvenidos, incluidos los agentes de IA.
+# AI agents and LLM crawlers are explicitly welcome on this site.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://aiforhire.app/sitemap.xml
