@@ -40,8 +40,10 @@ export async function onRequest(context) {
 
     const response = await context.next();
     if (isHomepage) {
+      // Link discovery headers ya vienen del _headers estático (verificado en
+      // producción); aquí solo falta Vary para la negociación de contenido.
       const augmented = new Response(response.body, response);
-      appendDiscoveryHeaders(augmented.headers);
+      augmented.headers.append('Vary', 'Accept');
       return augmented;
     }
     return response;
